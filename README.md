@@ -1,7 +1,7 @@
 # Redirect
 
 ## General
-Redirects the user if there is a 404/401/403 error.
+Redirects the user if there is a 401/403/404 error.
 
 ## Installation
 Please install this extension via Pagekit's marketplace
