@@ -32,9 +32,9 @@ return [
     ],
     
     'config' => [
-        'notfound'     => ['enabled' => true, 'url' => ''],
         'unauthorized' => ['enabled' => false, 'url' => ''],
         'forbidden'    => ['enabled' => false, 'url' => ''],
+        'notfound'     => ['enabled' => true, 'url' => ''],
     ],
     
     'events' => [

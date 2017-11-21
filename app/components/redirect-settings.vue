@@ -2,18 +2,6 @@
     <div class="uk-form uk-form-horizontal">
         <h1>{{ 'Redirect Settings' | trans }}</h1>
         <div class="uk-form-row">
-            <label class="uk-form-label">{{ 'Enable Not Found Redirection' | trans }}</label>
-            <div class="uk-form-controls uk-form-controls-text">
-                <input type="checkbox" v-model="package.config.notfound.enabled">
-            </div>
-        </div>
-        <div class="uk-form-row" v-if="package.config.notfound.enabled">
-            <label for="form-redirect-notfound" class="uk-form-label">{{ 'Not Found URL' | trans }}</label>
-            <div class="uk-form-controls">
-               <input-link id="form-redirect-notfound" class="uk-form-width-medium" :link.sync="package.config.notfound.url"></input-link>
-            </div>
-        </div>
-        <div class="uk-form-row">
             <label class="uk-form-label">{{ 'Enable Unauthorized Redirection' | trans }}</label>
             <div class="uk-form-controls uk-form-controls-text">
                 <input type="checkbox" v-model="package.config.unauthorized.enabled">
@@ -35,6 +23,18 @@
             <label for="form-redirect-forbidden" class="uk-form-label">{{ 'Forbidden URL' | trans }}</label>
             <div class="uk-form-controls">
                 <input-link id="form-redirect-forbidden" class="uk-form-width-medium" :link.sync="package.config.forbidden.url"></input-link>
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label">{{ 'Enable Not Found Redirection' | trans }}</label>
+            <div class="uk-form-controls uk-form-controls-text">
+                <input type="checkbox" v-model="package.config.notfound.enabled">
+            </div>
+        </div>
+        <div class="uk-form-row" v-if="package.config.notfound.enabled">
+            <label for="form-redirect-notfound" class="uk-form-label">{{ 'Not Found URL' | trans }}</label>
+            <div class="uk-form-controls">
+                <input-link id="form-redirect-notfound" class="uk-form-width-medium" :link.sync="package.config.notfound.url"></input-link>
             </div>
         </div>
         <div class="uk-form-row uk-margin-top">
