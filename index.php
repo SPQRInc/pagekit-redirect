@@ -46,7 +46,7 @@ return [
         'view.scripts' => function ($event, $scripts) use ($app) {
             $scripts->register('redirect-settings',
                 'spqr/redirect:app/bundle/redirect-settings.js',
-                ['~extensions', 'input-link ']);
+                ['~extensions', 'input-link']);
         },
     ],
 ];

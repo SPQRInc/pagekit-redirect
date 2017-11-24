@@ -7,6 +7,7 @@
                 <input type="checkbox" v-model="package.config.unauthorized.enabled">
             </div>
         </div>
+
         <div class="uk-form-row" v-if="package.config.unauthorized.enabled">
             <label for="form-redirect-unauthorized" class="uk-form-label">{{ 'Unauthorized URL' | trans }}</label>
             <div class="uk-form-controls">
@@ -19,6 +20,7 @@
                 <input type="checkbox" v-model="package.config.forbidden.enabled">
             </div>
         </div>
+
         <div class="uk-form-row" v-if="package.config.forbidden.enabled">
             <label for="form-redirect-forbidden" class="uk-form-label">{{ 'Forbidden URL' | trans }}</label>
             <div class="uk-form-controls">
