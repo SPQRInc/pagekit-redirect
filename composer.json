@@ -1,10 +1,10 @@
 {
   "name": "spqr/redirect",
   "module": "spqr/redirect",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "type": "pagekit-extension",
   "title": "Redirect",
-  "description": "Redirects the user if there is a 401/403/404 error.",
+  "description": "Redirects the users to any page you want. Also supports to redirect custom HTTP responses like 401, 403 or 404",
   "license": "MIT",
   "authors": [
     {

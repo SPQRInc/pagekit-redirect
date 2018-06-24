@@ -1,7 +1,12 @@
 module.exports = [
 	{
 		entry: {
-			"redirect-settings": "./app/components/redirect-settings.vue"
+			"settings": "./app/views/admin/settings.js",
+			"target-index": "./app/views/admin/target-index",
+			"target-edit": "./app/views/admin/target-edit",
+			"target-url": "./app/components/target-url.vue",
+			"statistic-index": "./app/views/admin/statistic-index",
+			"statistic-edit": "./app/views/admin/statistic-edit"
 		},
 		output: {
 			filename: "./app/bundle/[name].js"

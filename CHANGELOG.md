@@ -1,3 +1,10 @@
+## 2.0.0
+
+- ADD: Added redirection targets
+- ADD: Added statistics
+- ADD: Added different redirection-responses
+- ADD: Added custom HTML responses
+
 ## 1.0.2
 
 - FIX: Fixed typo that caused missing <input-link> component
