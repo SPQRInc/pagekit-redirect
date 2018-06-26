@@ -20,36 +20,37 @@ class StatisticApiController
      *
      * @return mixed
      */
-    public function indexAction( $filter = [], $page = 0, $limit = 0 )
+    public function indexAction($filter = [], $page = 0, $limit = 0)
     {
         $query  = Statistic::query();
-        $filter = array_merge( array_fill_keys( [ 'status', 'search', 'limit', 'order' ], '' ), $filter );
-        extract( $filter, EXTR_SKIP );
-        if ( is_numeric( $status ) ) {
-            $query->where( [ 'status' => (int) $status ] );
+        $filter = array_merge(array_fill_keys([
+            'status',
+            'search',
+            'limit',
+            'order',
+        ], ''), $filter);
+        extract($filter, EXTR_SKIP);
+        if (is_numeric($status)) {
+            $query->where(['status' => (int)$status]);
         }
         
-        if ( preg_match( '/^(id|date)\s(asc|desc)$/i', $order, $match ) ) {
+        if (preg_match('/^(id|date)\s(asc|desc)$/i', $order, $match)) {
             $order = $match;
         } else {
-            $order = [ 1 => 'id', 2 => 'asc' ];
+            $order = [1 => 'id', 2 => 'asc'];
         }
         
         
-        $default    = App::module( 'spqr/redirect' )->config( 'items_per_page' );
-        $limit      = min( max( 0, $limit ), $default ) ? : $default;
+        $default    = App::module('spqr/redirect')->config('items_per_page');
+        $limit      = min(max(0, $limit), $default) ? : $default;
         $count      = $query->count();
-        $pages      = ceil( $count / $limit );
-        $page       = max( 0, min( $pages - 1, $page ) );
-        $statistics = array_values(
-            $query->offset( $page * $limit )->related( 'url.target' )->limit(
-                $limit )->orderBy(
-                $order[ 1 ],
-                $order[ 2 ]
-            )->get()
-        );
+        $pages      = ceil($count / $limit);
+        $page       = max(0, min($pages - 1, $page));
+        $statistics = array_values($query->offset($page * $limit)
+            ->related('url.target')->limit($limit)
+            ->orderBy($order[1], $order[2])->get());
         
-        return compact( 'statistics', 'pages', 'count' );
+        return compact('statistics', 'pages', 'count');
     }
     
     /**
@@ -58,29 +59,15 @@ class StatisticApiController
      *
      * @return static
      */
-    public function getAction( $id )
+    public function getAction($id)
     {
-        if ( !$statistic = Statistic::where( compact( 'id' ) )->related( 'url', 'url.target' )->first() ) {
-            App::abort( 404, 'Statistic not found.' );
+        if (!$statistic = Statistic::where(compact('id'))
+            ->related('url', 'url.target')->first()
+        ) {
+            App::abort(404, 'Statistic not found.');
         }
         
         return $statistic;
-    }
-    
-    /**
-     * @Route("/clear", methods="DELETE")
-     * @Request(csrf=true)
-     * @return array
-     */
-    public function clearAction()
-    {
-        $statistics = Statistic::findAll();
-        
-        foreach ( $statistics as $statistic ) {
-            $this->deleteAction( $statistic->id );
-        }
-        
-        return [ 'message' => 'success' ];
     }
     
     /**
@@ -90,13 +77,13 @@ class StatisticApiController
      *
      * @return array
      */
-    public function bulkDeleteAction( $ids = [] )
+    public function bulkDeleteAction($ids = [])
     {
-        foreach ( array_filter( $ids ) as $id ) {
-            $this->deleteAction( $id );
+        foreach (array_filter($ids) as $id) {
+            $this->deleteAction($id);
         }
         
-        return [ 'message' => 'success' ];
+        return ['message' => 'success'];
     }
     
     /**
@@ -106,17 +93,40 @@ class StatisticApiController
      *
      * @return array
      */
-    public function deleteAction( $id )
+    public function deleteAction($id)
     {
-        if ( $statistic = Statistic::find( $id ) ) {
-            if ( !App::user()->hasAccess( 'redirect: manage statistics' ) ) {
-                App::abort( 400, __( 'Access denied.' ) );
+        if ($statistic = Statistic::find($id)) {
+            if (!App::user()->hasAccess('redirect: manage statistics')) {
+                App::abort(400, __('Access denied.'));
             }
             
             $statistic->delete();
         }
         
-        return [ 'message' => 'success' ];
+        return ['message' => 'success'];
+    }
+    
+    /**
+     * @Route("/purge", methods="DELETE")
+     * @Request(csrf=true)
+     *
+     * @return array
+     */
+    public function purgeAction()
+    {
+        if ($statistics = Statistic::findAll()) {
+            
+            if (!App::user()->hasAccess('redirect: manage statistics')) {
+                App::abort(400, __('Access denied.'));
+            }
+            
+            foreach ($statistics as $statistic) {
+                $statistic->delete();
+            }
+            
+        }
+        
+        return ['message' => 'success'];
     }
     
 }

@@ -75,6 +75,13 @@ window.redirectstatistics = {
 				this.$notify('Statistics deleted.');
 			});
 		},
+		purge: function () {
+
+			this.resource.delete({id: 'purge'}, {}).then(function () {
+				this.load();
+				this.$notify('All Statistics deleted.');
+			});
+		},
 		load: function () {
 			this.resource.query({filter: this.config.filter, page: this.config.page}).then(function (res) {
 

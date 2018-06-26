@@ -3,8 +3,20 @@
 <div id="statistics" class="uk-form" v-cloak>
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
-            <h2 class="uk-margin-remove"
-                v-if="!selected.length">{{ '{0} %count% Statistics|{1} %count% Statistic|]1,Inf[ %count% Statistics' | transChoice count {count:count} }}</h2>
+	        <template v-if="!selected.length">
+	            <h2 class="uk-margin-remove">{{ '{0} %count% Statistics|{1} %count% Statistic|]1,Inf[ %count% Statistics' | transChoice count {count:count} }}</h2>
+		        <div class="uk-margin-left">
+			        <ul class="uk-subnav pk-subnav-icon">
+				        <li>
+					        <a class="pk-icon-delete pk-icon-hover"
+					           title="Delete all"
+					           data-uk-tooltip="{delay: 500}"
+					           @click="purge" v-confirm="'Delete all
+					           Statistics?'"></a>
+				        </li>
+			        </ul>
+		        </div>
+	        </template>
             <template v-else>
                 <h2 class="uk-margin-remove">{{ '{1} %count% Statistic selected|]1,Inf[ %count% Statistics selected' | transChoice selected.length {count:selected.length} }}</h2>
                 <div class="uk-margin-left">
