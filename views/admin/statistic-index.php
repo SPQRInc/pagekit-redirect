@@ -1,4 +1,5 @@
 <?php $view->script( 'statistic-index', 'spqr/redirect:app/bundle/statistic-index.js', 'vue' ); ?>
+
 <div id="statistics" class="uk-form" v-cloak>
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
@@ -61,10 +62,12 @@
                     <a :href="$url.route('admin/redirect/statistic/edit', {
                     id: statistic.id })">{{ statistic.target ? statistic.target.title :  'Not defined' | trans }}</a>
                 </td>
-	            <ul class="uk-list uk-list-space">
-		            <li><span class="uk-badge">{{ 'Called Url' | trans }}</span> {{ statistic.called_url ? statistic.called_url :  'Not defined' | trans }}</li>
-		            <li><span class="uk-badge">{{ 'Url' | trans }}</span> {{ statistic.url.url ? statistic.url.url :  'Not defined' | trans }}</li>
-	            </ul>
+                <td>
+	                <ul class="uk-list uk-list-space">
+		                <li><span class="uk-badge">{{ 'Called Url' | trans }}</span> {{ statistic.called_url ? statistic.called_url :  'Not defined' | trans }}</li>
+		                <li><span class="uk-badge">{{ 'Url' | trans }}</span> {{ statistic.url.url ? statistic.url.url :  'Not defined' | trans }}</li>
+	                </ul>
+                </td>
                 <td>
                     {{ statistic.response }}
                 </td>

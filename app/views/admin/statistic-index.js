@@ -76,8 +76,7 @@ window.redirectstatistics = {
 			});
 		},
 		purge: function () {
-
-			this.resource.delete({id: 'purge'}, {}).then(function () {
+			this.resource.delete({id: 'purge'}).then(function () {
 				this.load();
 				this.$notify('All Statistics deleted.');
 			});
