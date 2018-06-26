@@ -1,3 +1,8 @@
+## 2.0.1
+
+- FIX: Minor bugfixes
+- ADD: Allows to purge all statistic items
+
 ## 2.0.0
 
 - ADD: Added redirection targets

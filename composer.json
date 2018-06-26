@@ -1,7 +1,7 @@
 {
   "name": "spqr/redirect",
   "module": "spqr/redirect",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "type": "pagekit-extension",
   "title": "Redirect",
   "description": "Redirects the users to any page you want. Also supports to redirect custom HTTP responses like 401, 403 or 404",
