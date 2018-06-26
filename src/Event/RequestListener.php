@@ -45,12 +45,22 @@ class RequestListener implements EventSubscriberInterface
     }
     
     /**
+     * @param $event
+     * @param $request
+     */
+    public function onException($event, $request)
+    {
+        return $this->onRequest($event, $request);
+    }
+    
+    /**
      * @return array
      */
     public function subscribe()
     {
         return [
-            'request' => ['onRequest', -150],
+            'exception' => ['onException', 0],
+            'request' => ['onRequest', -150]
         ];
     }
 }
